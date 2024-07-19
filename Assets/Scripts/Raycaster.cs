@@ -18,21 +18,20 @@ public class Raycaster : MonoBehaviour
 
     private void Cast()
     {
-        RaycastHit hit;
         _ray = _camera.ScreenPointToRay(Input.mousePosition);
 
         Debug.DrawRay(_ray.origin, _ray.direction * _maxDistence, Color.red);
 
-        if (Physics.Raycast(_ray, out hit, _maxDistence, _mask))
-            hit.collider.GetComponent<IClickable>().OnClick();
+        if (Physics.Raycast(_ray, out RaycastHit hit, _maxDistence, _mask))
+            if (hit.collider.TryGetComponent<IClickable>(out IClickable clickable))
+                clickable.OnClick();
     }
 
     private void OnDrawGizmos()
     {
-        RaycastHit hit;
         Gizmos.color = Color.blue;
 
-        if (Physics.Raycast(_ray, out hit, Mathf.Infinity, _mask))
+        if (Physics.Raycast(_ray, out RaycastHit hit, Mathf.Infinity, _mask))
             Gizmos.DrawSphere(hit.point, _radius);
     }
 }

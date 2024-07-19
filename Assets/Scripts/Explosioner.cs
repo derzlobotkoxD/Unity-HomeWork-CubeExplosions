@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,14 +17,15 @@ public class Explosioner : MonoBehaviour
         _spawner.Created -= Explode;
     }
 
-    private void Explode(List<Cube> cubes)
+    private void Explode(List<Cube> cubes, Vector3 center)
     {
         foreach (Cube cube in cubes)
         {
             Rigidbody rigidbody = cube.GetComponent<Rigidbody>();
 
-            cube.transform.Rotate(Vector3.up * Random.Range(0, 360f));
-            rigidbody.AddForce(cube.transform.forward * _force, ForceMode.Force);
+            Vector3 direction = cube.transform.position - center;
+
+            rigidbody.AddForce(direction * _force, ForceMode.Force);
         }
     }
 }
