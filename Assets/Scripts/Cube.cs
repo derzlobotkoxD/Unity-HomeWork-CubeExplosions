@@ -54,13 +54,7 @@ public class Cube : MonoBehaviour, IClickable
         {
             Rigidbody rigidbody = collider.GetComponent<Rigidbody>();
 
-            rigidbody?.AddExplosionForce(force, transform.position, radius);
+            rigidbody.AddExplosionForce(force, transform.position, radius);
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = new Color(1f, 1f, 1f, 0.2f);
-        Gizmos.DrawSphere(transform.position, _explosionRadius / transform.localScale.magnitude);
     }
 }

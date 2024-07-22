@@ -5,6 +5,7 @@ public class Explosioner : MonoBehaviour
 {
     [SerializeField] private CubeSpawner _spawner;
     [SerializeField] private float _force = 1000;
+    [SerializeField] private float _explosionRadius = 12f;
 
     private void OnEnable()
     {
@@ -19,10 +20,6 @@ public class Explosioner : MonoBehaviour
     private void Explode(List<Cube> cubes, Vector3 center)
     {
         foreach (Cube cube in cubes)
-        {
-            Vector3 direction = cube.transform.position - center;
-
-            cube.Rigidbody.AddForce(direction * _force, ForceMode.Force);
-        }
+            cube.Rigidbody.AddExplosionForce(_force, center, _explosionRadius);
     }
 }
