@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,11 +20,9 @@ public class Explosioner : MonoBehaviour
     {
         foreach (Cube cube in cubes)
         {
-            Rigidbody rigidbody = cube.GetComponent<Rigidbody>();
-
             Vector3 direction = cube.transform.position - center;
 
-            rigidbody.AddForce(direction * _force, ForceMode.Force);
+            cube.Rigidbody.AddForce(direction * _force, ForceMode.Force);
         }
     }
 }
