@@ -6,7 +6,6 @@ public class Raycaster : MonoBehaviour
     [SerializeField] private Camera _camera;
 
     [Range(0, 100)][SerializeField] private float _maxDistence = 35f;
-    [Range(0, 5)][SerializeField] private float _radius = 1f;
 
     private void Update()
     {
